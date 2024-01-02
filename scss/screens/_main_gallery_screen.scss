@@ -1,0 +1,94 @@
+.main-gallery-screen {
+    background: $base-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .navbar {
+        width: 100%;
+        height: fit-content;
+        background: $accent-color;
+        color: $base-color;
+        display: flex;
+
+        .tab {
+            box-sizing: border-box;
+            padding: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 25px;
+            font-weight: 900;
+            font-family: 'Pacifico';
+            cursor: pointer;
+            transition: .25s;
+            margin: 10px;
+            margin-right: 0px;
+
+            border: $base-color dashed 5px;
+
+            &:hover {
+                background: $accent-color-darker;
+            }
+        }
+    }
+
+    .content {
+        width: 100%;
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .title {
+            max-width: 1000px;
+            width: 100%;
+            background: $accent-color-darker;
+            box-sizing: border-box;
+            padding: 5px;
+            padding-left: 10px;
+            border-radius: 5px 5px 0px 0px;
+            color: $dark-accent-color-darker;
+            font-family: 'Pacifico';
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            height: 80%;
+            background: $accent-color;
+            border-radius: 0px 0px 5px 5px;
+            overflow-y: scroll;
+            padding-top: 25px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .gallery-image {
+                width: 750px;
+                height: fit-content;
+                box-sizing: border-box;
+                display: flex;
+                margin-bottom: 25px;
+                border-radius: 5px;
+                background: $accent-color-darker;
+
+                img {
+                    width: 500px;
+                    margin: 25px;
+                    border-radius: 5px;
+                }
+
+                .tags {
+                    height: 100%;
+                    width: fit-content;
+                    box-sizing: border-box;
+                    padding: 25px;
+                }
+            }
+        }
+    }
+}

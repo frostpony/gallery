@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frost - Gallery</title>
+    <link rel="icon" type="image/png" href="./assets/img/gallery_icon.png">
+
+    <meta name="theme-color" content="#c2d58e">
+    <meta itemprop="name" content="FrostPony">
+    <meta itemprop="description" content="A frozen Pony!">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="frostpony.github.io">
+    <meta property="og:title" content="Frost">
+    <meta property="og:description" content="A frozen Pony!">
+    <meta property="og:image" content="https://raw.githubusercontent.com/frostpony/frostpony/main/pfp.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@discord">
+
+    <link rel="stylesheet" href="./scss/style.css">
+</head>
+<body>
+    <div class="display-manager">
+        <div class="loading-screen screen hidden">
+            <img src="./assets/img/loading.png">
+            <span>... Loading ...</span>
+        </div>
+        <div class="error-screen screen">
+            <img src="./assets/img/loading.png">
+            <span>!!! Error !!!</span>
+        </div>
+
+        <div class="main-gallery-screen screen hidden">
+            <div class="navbar">
+                <div class="tab" onclick="load_gallery('general')">
+                    General
+                </div>
+                <div class="tab" onclick="load_gallery('daily')">
+                    Daily
+                </div>
+            </div>
+            <div class="content">
+                <div class="title" id="gallery-title">
+                    Loading
+                </div>
+                <div class="container" id="gallery-container">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/thirdparty.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/screen_manager.js"></script>
+</body>
+</html>

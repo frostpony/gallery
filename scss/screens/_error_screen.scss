@@ -1,0 +1,18 @@
+.error-screen {
+    background: $base-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+        width: 25%;
+    }
+
+    span {
+        font-family: 'Rubik Scribble';
+        color: $dark-accent-color;
+        font-size: 50px;
+        font-weight: 900;
+    }
+}
