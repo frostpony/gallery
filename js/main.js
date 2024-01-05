@@ -130,19 +130,29 @@ async function get_content() {
 
     for (var status of status_array) {
         if (status.content.includes("$MAINART")) {
-            for (var image of status.media_attachments) {
-                if (image.type == "image") {
-                    var img = new MyImage(image.url, []);
-                    return_object.mainart.push(img);
+            if (status.content.includes("$ONE") && status.media_attachments.length > 0) {
+                var img = new MyImage(status.media_attachments[0].url, []);
+                return_object.mainart.push(img);
+            } else {
+                for (var image of status.media_attachments) {
+                    if (image.type == "image") {
+                        var img = new MyImage(image.url, []);
+                        return_object.mainart.push(img);
+                    }
                 }
             }
         }
 
         if (status.content.includes("$DAILYART")) {
-            for (var image of status.media_attachments) {
-                if (image.type == "image") {
-                    var img = new MyImage(image.url, []);
-                    return_object.dailyart.push(img);
+            if (status.content.includes("$ONE") && status.media_attachments.length > 0) {
+                var img = new MyImage(status.media_attachments[0].url, []);
+                return_object.dailyart.push(img);
+            } else {
+                for (var image of status.media_attachments) {
+                    if (image.type == "image") {
+                        var img = new MyImage(image.url, []);
+                        return_object.dailyart.push(img);
+                    }
                 }
             }
         }
