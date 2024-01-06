@@ -1,7 +1,10 @@
 const MASTODON_INSTANCE_URL = "https://pone.social"
 const MY_ID = "111643007318109517"
 
-var GALLERY = null;
+var GALLERY = {
+    "mainart": [],
+    "dailyart": []
+};
 
 class MyImage {
     url;
@@ -19,15 +22,27 @@ class MyImage {
 
 window.onload = async function () {
     load_screen("loading");
-    var data = await get_content();
-    if (data != null) {
-        GALLERY = data;
+    var ok = true;
+    var data;
+    var last_id = null;
+    do {
+        data = await get_content(last_id);
         console.log(data);
+        if (data != null) {
+            GALLERY.mainart = GALLERY.mainart.concat(data.mainart);
+            GALLERY.dailyart = GALLERY.dailyart.concat(data.dailyart);
+        } else {
+            ok = false;
+            console.log("An error occured while retriving data!");
+            load_screen("error");
+            break;
+        }
+        last_id = data.last_id;
+    } while (data.last_id != null);
+    
+    if (ok) {
         load_screen("main-gallery");
         load_gallery("general");
-    } else {
-        console.log("An error occured while retriving data!");
-        load_screen("error");
     }
 }
 
@@ -109,11 +124,15 @@ function load_gallery(gallery) {
     }
 }
 
-async function get_content() {
+async function get_content(max_id = null) {
     
     var response;
     try {
-        response = await fetch(MASTODON_INSTANCE_URL + "/api/v1/accounts/" + MY_ID + "/statuses");
+        if (max_id != null) {
+            response = await fetch(MASTODON_INSTANCE_URL + "/api/v1/accounts/" + MY_ID + "/statuses?max_id=" + max_id);
+        } else {
+            response = await fetch(MASTODON_INSTANCE_URL + "/api/v1/accounts/" + MY_ID + "/statuses");
+        }
     } catch {
         return null;
     }
@@ -125,8 +144,15 @@ async function get_content() {
 
     var return_object = {
         "mainart": [],
-        "dailyart": []
+        "dailyart": [],
+        "last_id": null
     };
+
+    if (status_array.length == 20) {
+        // TODO: LOOK UP IF THE MAX LENGTH OF RESP STATUS ARRAY CAN BE CHANGED FROM 20
+        // BY THE INSTANCEADMIN!!!
+        return_object.last_id = status_array[19].id;
+    }
 
     for (var status of status_array) {
         if (status.content.includes("$MAINART")) {
