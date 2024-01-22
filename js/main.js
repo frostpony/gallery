@@ -129,9 +129,9 @@ async function get_content(max_id = null) {
     var response;
     try {
         if (max_id != null) {
-            response = await fetch(MASTODON_INSTANCE_URL + "/api/v1/accounts/" + MY_ID + "/statuses?max_id=" + max_id);
+            response = await fetch(MASTODON_INSTANCE_URL + "/api/v1/accounts/" + MY_ID + "/statuses?max_id=" + max_id +"&only_media=true&exclude_replies=true");
         } else {
-            response = await fetch(MASTODON_INSTANCE_URL + "/api/v1/accounts/" + MY_ID + "/statuses");
+            response = await fetch(MASTODON_INSTANCE_URL + "/api/v1/accounts/" + MY_ID + "/statuses?only_media=true&exclude_replies=true");
         }
     } catch {
         return null;
